@@ -1,5 +1,7 @@
 %{
-
+/*
+	Used for the syntax analyzer
+*/
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>

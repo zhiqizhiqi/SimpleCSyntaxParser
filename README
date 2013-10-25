@@ -1,3 +1,7 @@
 la.l: the lexical analyzer
 sa.y: the syntax analyzer
 struct.h: the data structure used in both of above two file of code.
+
+command:
+$ make
+$ ./program <input file> <output file>

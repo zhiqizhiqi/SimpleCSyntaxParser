@@ -1,4 +1,7 @@
 %{
+/*
+	Used for lexical analyzer!
+*/
 #include "struct.h"
 #include "y.tab.h"
 
@@ -8,7 +11,7 @@
 Node* createNode(char*, char*);
 %}
 
-int	 [0-9]+
+int	 [0-9]+|0x[0-9A-F]+
 id 	 [_a-zA-Z][_a-zA-Z0-9]*
 
 b ;;

@@ -11,7 +11,7 @@
                                                         INIT:
                                                                    EXP:
                                                                              EXP:
-                                                                                       INT_1
+                                                                                       INT_0x1
                                                                         BINARYOP:
                                                                                       PLUS_+
                                                                              EXP:
