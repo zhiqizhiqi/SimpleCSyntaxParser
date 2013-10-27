@@ -3,23 +3,56 @@
                         EXTDEF:
                                     SPEC:
                                               TYPE_int
-                                 EXTVARS:
-                                               DEC:
-                                                         VAR:
-                                                                    ID_a
-                                                    ASSIGNOP_=
-                                                        INIT:
+                                    FUNC:
+                                                ID_main
+                                                LP_(
+                                             PARAS
+                                                RP_)
+                               STMTBLOCK:
+                                                LC_{
+                                              DEFS
+                                             STMTS:
+                                                        STMT:
+                                                                   FOR_for
+                                                                    LP_(
                                                                    EXP:
                                                                              EXP:
-                                                                                       INT_0x1
-                                                                        BINARYOP:
-                                                                                      PLUS_+
+                                                                                        ID_a
+                                                                        ASSIGNOP_=
+                                                                             EXP:
+                                                                                       INT_2
+                                                                  SEMI_;
+                                                                   EXP:
                                                                              EXP:
                                                                                        EXP:
-                                                                                                 INT_2
-                                                                                  BINARYOP:
-                                                                                             PRODUCT_*
+                                                                                                  ID_a
+                                                                                       DOT_.
                                                                                        EXP:
-                                                                                                 INT_3
-                                    SEMI_;
+                                                                                                  ID_index
+                                                                          NOTEQU_!=
+                                                                             EXP:
+                                                                                       INT_0
+                                                                  SEMI_;
+                                                                   EXP:
+                                                                            INCR_++
+                                                                             EXP:
+                                                                                        ID_a
+                                                                    RP_)
+                                                                  STMT:
+                                                                       STMTBLOCK:
+                                                                                        LC_{
+                                                                                      DEFS:
+                                                                                                 DEF:
+                                                                                                          SPEC:
+                                                                                                                    TYPE_int
+                                                                                                          DECS:
+                                                                                                                     DEC:
+                                                                                                                               VAR:
+                                                                                                                                          ID_fuck
+                                                                                                          SEMI_;
+                                                                                                DEFS
+                                                                                     STMTS
+                                                                                        RC_}
+                                                       STMTS
+                                                RC_}
                        EXTDEFS

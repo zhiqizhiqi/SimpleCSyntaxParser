@@ -1,1 +1,5 @@
-int a = 0x1 +  2*3;
+int main() {
+	for (a=2; a.index!=0; ++a) {
+		int fuck;
+	}	
+}

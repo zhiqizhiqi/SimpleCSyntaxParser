@@ -15,8 +15,7 @@ Node* Record(char *, ...);
 
 FILE *fout;
 
-extern int yydebug;
-%}
+extern int yydebug; %}
 
 %union {
 	Node *node;
@@ -42,68 +41,26 @@ extern int yydebug;
 %token <node> LOGOR
 %token <node> PLUSAN MINUSAN PRODUCTAN DIVISIONAN BANDAN BXORAN BORAN SHLEFTAN SHRIGHTAN
 
-%type <node> BINARYOP UNARYOP
 %type <node> PROGRAM EXTDEFS EXTDEF EXTVARS SPEC STSPEC OPTTAG
 %type <node> VAR FUNC PARAS PARA STMTBLOCK STMTS STMT ESTMT
 %type <node> DEFS DEF DECS DEC INIT EXP ARRS ARGS
 %start PROGRAM
 
-%left LP RP LB RB DOT
-%right LOGNOT INCR DECR BNOT
-%left MOD PRODUCT DIVISION
-%left PLUS MINUS
-%left SHLEFT SHRIGHT
-%left GREATER GREATEREQU LESS LESSEQU
-%left EQU NOTEQU
-%left BAND
-%left BXOR
-%left BOR
-%left LOGAND
+%right PLUSAN MINUSAN PRODUCTAN DIVISIONAN BANDAN BXORAN BORAN SHLEFTAN SHRIGHTAN ASSIGNOP
 %left LOGOR
-%right PLUSAN MINUSAN PRODUCTAN DIVISIONAN BANDAN BXORAN BORAN SHLEFTAN SHRIGHTAN
+%left LOGAND
+%left BOR
+%left BXOR
+%left BAND
+%left EQU NOTEQU
+%left GREATER GREATEREQU LESS LESSEQU
+%left SHLEFT SHRIGHT
+%left PLUS MINUS
+%left MOD PRODUCT DIVISION
+%right LOGNOT INCR DECR BNOT
+%left LP RP LB RB DOT
 
 %%
-
-BINARYOP:
-	PLUS 			{$$ = Record("BINARYOP", $1, NULL);}
-	| MINUS 		{$$ = Record("BINARYOP", $1, NULL);}
-	| PRODUCT 		{$$ = Record("BINARYOP", $1, NULL);}
-	| DIVISION   	{$$ = Record("BINARYOP", $1, NULL);}
-	| PLUSAN 		{$$ = Record("BINARYOP", $1, NULL);}
-	| MINUSAN 		{$$ = Record("BINARYOP", $1, NULL);}
-	| PRODUCTAN 	{$$ = Record("BINARYOP", $1, NULL);}
-	| DIVISIONAN	{$$ = Record("BINARYOP", $1, NULL);}
-	| MOD 			{$$ = Record("BINARYOP", $1, NULL);}
-	| SHLEFT 		{$$ = Record("BINARYOP", $1, NULL);}
-	| SHRIGHT   	{$$ = Record("BINARYOP", $1, NULL);}
-	| GREATER 		{$$ = Record("BINARYOP", $1, NULL);}
-	| GREATEREQU	{$$ = Record("BINARYOP", $1, NULL);}
-	| LESS      	{$$ = Record("BINARYOP", $1, NULL);}
-	| LESSEQU   	{$$ = Record("BINARYOP", $1, NULL);}
-	| EQU			{$$ = Record("BINARYOP", $1, NULL);}
-	| NOTEQU 		{$$ = Record("BINARYOP", $1, NULL);}
-	| BAND 		   	{$$ = Record("BINARYOP", $1, NULL);}
-	| BXOR  		{$$ = Record("BINARYOP", $1, NULL);}
-	| BOR 	 		{$$ = Record("BINARYOP", $1, NULL);}
-	| LOGAND	 	{$$ = Record("BINARYOP", $1, NULL);}
-	| LOGOR			{$$ = Record("BINARYOP", $1, NULL);}
-	| BANDAN 		{$$ = Record("BINARYOP", $1, NULL);}
-	| BXORAN 		{$$ = Record("BINARYOP", $1, NULL);}
-	| BORAN 	  	{$$ = Record("BINARYOP", $1, NULL);}
-	| SHLEFTAN 		{$$ = Record("BINARYOP", $1, NULL);}
-	| SHRIGHTAN		{$$ = Record("BINARYOP", $1, NULL);}
-	| DOT			{$$ = Record("BINARYOP", $1, NULL);}
-	| ASSIGNOP		{$$ = Record("BINARYOP", $1, NULL);}
-	;
-
-UNARYOP:
-	MINUS 			{$$ = Record("UNARYOP", $1, NULL);}
-	| INCR 			{$$ = Record("UNARYOP", $1, NULL);}
-	| DECR 			{$$ = Record("UNARYOP", $1, NULL);}
-	| BNOT 			{$$ = Record("UNARYOP", $1, NULL);}
-	| LOGNOT 		{$$ = Record("UNARYOP", $1, NULL);}
-	;
-
 PROGRAM:
 	EXTDEFS					{$$ = Record("PROGRAM", $1, NULL);}
 	;
@@ -207,12 +164,43 @@ INIT:
 	;
 EXP:
 	ID 						{$$ = Record("EXP", $1, NULL);}
-	| EXP BINARYOP EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
-	| UNARYOP EXP			{$$ = Record("EXP", $1, $2, NULL);}
+	| EXP PLUS EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP MINUS EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP PRODUCT EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP DIVISION EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP PLUSAN EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP MINUSAN EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP PRODUCTAN EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP DIVISIONAN EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP MOD EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP SHLEFT EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP SHRIGHT EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP GREATER EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP GREATEREQU EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP LESS EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP LESSEQU EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP EQU EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP NOTEQU EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP BAND EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP BXOR EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP BOR EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP LOGAND EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP LOGOR EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP BANDAN EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP BXORAN EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP BORAN EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP SHLEFTAN EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP SHRIGHTAN EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP DOT EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| EXP ASSIGNOP EXP		{$$ = Record("EXP", $1, $2, $3, NULL);}
+	| MINUS EXP			{$$ = Record("EXP", $1, $2, NULL);}
+	| INCR EXP			{$$ = Record("EXP", $1, $2, NULL);}
+	| DECR EXP			{$$ = Record("EXP", $1, $2, NULL);}
+	| BNOT EXP			{$$ = Record("EXP", $1, $2, NULL);}	
+	| LOGNOT EXP			{$$ = Record("EXP", $1, $2, NULL);}
 	| LP EXP RP				{$$ = Record("EXP", $1, $2, $3, NULL);}
 	| ID LP ARGS RP			{$$ = Record("EXP", $1, $2, $3, $4, NULL);}
 	| ID ARRS				{$$ = Record("EXP", $1, $2, NULL);}
-	| EXP DOT ID 			{$$ = Record("EXP", $1, $2, $3, NULL);}
 	| INT 					{$$ = Record("EXP", $1, NULL);}
 	|						{$$ = Record("EXP", NULL);}
 	;
@@ -243,7 +231,7 @@ void walkGraph(Node* n, int layer) {
 }
 int main(int argc, char* argv[]){
 	//printf ("%s%s\n", argv[0], argv[1]);
-	yydebug=0;
+	yydebug=0;	//set it to 1, that should be DEBUG mode, to 0, that will disable DEBUG
 	freopen(argv[1], "r", stdin);
 	fout = fopen(argv[2], "w");
 	yyparse();
